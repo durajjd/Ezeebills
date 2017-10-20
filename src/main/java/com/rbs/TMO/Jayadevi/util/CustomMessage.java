@@ -1,4 +1,4 @@
-package com.rbs.training.supplychain.util;
+package com.rbs.TMO.Jayadevi.util;
 
 public class CustomMessage {
 	 private String message;

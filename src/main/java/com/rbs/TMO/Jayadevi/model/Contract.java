@@ -1,4 +1,4 @@
-package com.rbs.training.supplychain.model;
+package com.rbs.TMO.Jayadevi.model;
 
 public class Contract {
 private int contract_number;

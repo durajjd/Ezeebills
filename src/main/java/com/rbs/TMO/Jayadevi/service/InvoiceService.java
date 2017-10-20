@@ -1,4 +1,4 @@
-package com.rbs.training.supplychain.service;
+package com.rbs.TMO.Jayadevi.service;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,13 +26,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.rbs.training.supplychain.DAO.DataBaseConnection;
-import com.rbs.training.supplychain.model.Contract;
-import com.rbs.training.supplychain.model.ContractItems;
-import com.rbs.training.supplychain.model.Invoice;
-import com.rbs.training.supplychain.model.InvoiceItems;
-import com.rbs.training.supplychain.model.ProductInvoice;
-import com.rbs.training.supplychain.util.CustomMessage;
+import com.rbs.TMO.Jayadevi.DAO.DataBaseConnection;
+import com.rbs.TMO.Jayadevi.model.Contract;
+import com.rbs.TMO.Jayadevi.model.ContractItems;
+import com.rbs.TMO.Jayadevi.model.Invoice;
+import com.rbs.TMO.Jayadevi.model.InvoiceItems;
+import com.rbs.TMO.Jayadevi.model.ProductInvoice;
+import com.rbs.TMO.Jayadevi.service.InvoiceService;
+import com.rbs.TMO.Jayadevi.util.CustomMessage;
 
 @Service("invoiceServiceObj")
 public class InvoiceService {
@@ -51,9 +52,6 @@ public class InvoiceService {
 				else{
 					invobj.setInvoiceID(rs.getDouble(1)); 
 					do{
-				
-					//if(rs.wasNull())
-						//System.out.println("empty");
 					
 					invobj.setContractID(rs.getDouble(2));
 					invobj.setSellerID(rs.getDouble(3));
@@ -82,7 +80,7 @@ public class InvoiceService {
 		return invobj;			
 	}
 	
-	public List<Invoice> listAllInvocies(double sellerID){
+	public List<Invoice> listAllinvoices(double sellerID){
 		DataBaseConnection dbobj = new DataBaseConnection();
 		List<Invoice> lst = new ArrayList<Invoice>();
 		Invoice invobj = null;
@@ -121,7 +119,7 @@ public class InvoiceService {
 			}
 		return lst;			
 	}
-	public List<Invoice> approvedInvocies(int approvalStatus){
+	public List<Invoice> approvedinvoices(int approvalStatus){
 		DataBaseConnection dbobj = new DataBaseConnection();
 		List<Invoice> lst = new ArrayList<Invoice>();
 		Invoice invobj = null;
@@ -289,11 +287,7 @@ public class InvoiceService {
 			msg = new CustomMessage();
 				invobj = new Invoice();
 				
-				//double =invobj.invoiceNo++;
-				//String p="insert into invoice(invoice_id) value(22)";
-				//String updateTableSQL1 ="insert into invoice(invoice_id,contractID,sellerID,buyerID, billbookNo,senderID,receiverID,Payment_Date,invoice_amount,invoice_due_date) values(?,?,?,?,?,?,?,NULL,?,NULL)";
-				/*stmt.executeQuery("insert into invoice values("+invoiceNo+","+contractNo+","+buyerId+","+sellerId+","
-				+productId+","+unitPrice+","+quantity+","+grossAmount+","+tax+","+netAmount+","+"0,1,0");*/
+				
 			    
 				String updateTableSQL1 ="insert into invoice values(" +invoiceID +","+contractID+","+sellerID+","+buyerID+","+billbookNo+","+senderID+","+receiverID+","+"0,0,1,NULL,"+paymentDate+","+invoiceAmount+","+invoiceDueDate+ ",1,0,NULL )";
 				
@@ -918,7 +912,7 @@ public class InvoiceService {
 		
 		
 	}
-	public List<Invoice> listAllInvocies1(double sellerID){
+	public List<Invoice> listAllinvoices1(double sellerID){
 		DataBaseConnection dbobj = new DataBaseConnection();
 		List<Invoice> lst = new ArrayList<Invoice>();
 		Invoice invobj = null;

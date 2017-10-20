@@ -1,4 +1,4 @@
-package com.rbs.training.supplychain.model;
+package com.rbs.TMO.Jayadevi.model;
 
 public class InvoiceItems {
 	private double itemNo;
@@ -59,4 +59,3 @@ public class InvoiceItems {
 	private double unitprice;
 	
 }
-

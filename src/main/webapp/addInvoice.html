@@ -22,12 +22,12 @@
             	var netAmount = $scope.netAmount;
             	var tax = $scope.tax;
 				console.log("add Invoice");
-				console.log('http://localhost:8181/invoice/addInvoice/?invoiceNo='+invoiceNo+'&contractNo='+contractNo+
+				console.log('http://localhost:8080/invoice/addInvoice/?invoiceNo='+invoiceNo+'&contractNo='+contractNo+
                 		'&buyerId='+buyerId+'&sellerId='+sellerId+'&quantity='+quantity+'&productId='+
                 		productId+'&unitPrice='+unitPrice+'&grossAmount='+grossAmount+
                 		'&netAmount='+netAmount+'&tax='+tax);
 				
-                $http.post('http://localhost:8181/invoice/addInvoice/?invoiceNo='+invoiceNo+'&contractNo='+contractNo+
+                $http.post('http://localhost:8080/invoice/addInvoice/?invoiceNo='+invoiceNo+'&contractNo='+contractNo+
                 		'&buyerId='+buyerId+'&sellerId='+sellerId+'&quantity='+quantity+'&productId='+
                 		productId+'&unitPrice='+unitPrice+'&grossAmount='+grossAmount+
                 		'&netAmount='+netAmount+'&tax='+tax).success(function (data) {

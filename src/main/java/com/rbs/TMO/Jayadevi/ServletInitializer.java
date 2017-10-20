@@ -1,4 +1,4 @@
-package com.rbs.training.supplychain;
+package com.rbs.TMO.Jayadevi;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
@@ -7,7 +7,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(SupplychainApplication.class);
+		return application.sources(Ezeebills.class);
 	}
 
 }

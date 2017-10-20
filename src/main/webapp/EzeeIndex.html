@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Ezee Bills</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+    <title>Ezee Bills</title>
+
+<script type="text/javascript" src="f.resources2/script.js">
+    <script type="text/javascript" src="f.resources2/invoicescript.js">
+    </script>
+    <link href="f.resources2/bootstrap.min.css" rel="stylesheet">
+  <link href="f.resources2/login.css" rel="stylesheet">
+  <link href="f.resources2/styles.css" rel="stylesheet">
+  <link href="f.resources2/styles.css" rel="stylesheet">  
+    <script src="https://use.fontawesome.com/caba7b4681.js"></script>
+    
+</head>
+
+<body ng-app="invoiceApp" ng-controller="mainController">
+<header style="background:black">
+  <a style="text-decoration:none;" href="EzeeIndex.html"><h1 style="color:white;float:left;
+      font-size: 70px;margin:70px;">Ezee<span style="color:lightgreen">Bills</span></h1><img style="width:150px;height:150px;" src="f.resources2/images.jpg"> </a>
+   
+    
+ <ul style="background:#3f4042" >
+ 
+                             <li style="float:right"><button class="active" onclick="document.getElementById('id01').style.display='block'" >Logout</button></li>
+                               <div id="id01" class="modal">
+  
+  <form class="modal-content animate" action="/page1.html" method="post">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <h1 style="text-align:center" >Logged out Successfully<h1>
+    </div>
+
+    
+        
+    <input type="button" value="Login" id="submit" onclick="logout()"/>
+    <div class="container" style="background-color:#f1f1f1">
+	
+      <button type="button"  onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      
+    </div>  
+    </div>
+
+    
+  </form>
+</div>
+  
+ 
+           
+                   
+
+                          
+                            
+                                    <li ><a class="horiz" href="#/InvoiceLanding">Invoice Profile</a>
+                                    </li>
+                                    <li ><a class="horiz" href="#/InvoiceCreate">Create Invoice</a>
+                                    </li>
+                                    <li ><a class="horiz" href="#/InvoiceView">View Invoice</a>
+                                    </li>
+                                    <li ><a class="horiz" href="#/InvoiceUpdate">Update Invoice</a>
+                                    </li>
+                                    <li ><a class="horiz" href="#/InvoiceSearch">Search Invoice</a>
+                                    </li>
+                                    <li ><a class="horiz" href="#/InvoiceDeleteConfirm">Delete Invoice</a>
+                                    
+                                
+                            </li>
+</ul>
+
+
+</header>
+                         
+        <script>
+        </script>
+    </div>
+    <div style="margin-top: 10px">
+        <div style="margin-left: 10px; margin-right: 260px;">
+            <div class="jumbotron" style=" height:800px; border-radius: 10px; text-align: left;">
+                <div class="panel panel-default">
+                    
+                </div>
+                <div>
+                    <div ng-view></div>
+                </div>
+            </div>
+        </div>
+     </div>
+</body>
+
+</html>

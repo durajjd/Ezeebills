@@ -115,30 +115,7 @@ function gotoprofile() {
         w.style.display = 'none';
     } 
 }
-/*function toggleview2(draft, approval, compliance, funding) {
-    var x = document.getElementById('invoice');
-    var y = document.getElementById('view');
-    var z = document.getElementById('buttongroup');
-    var draftbutton = document.getElementById('draftbutton');
-    var compliancebutton = document.getElementById('compliancebutton');
-    var viewbutton = document.getElementById('viewbutton');
-    //console.log(draft);
-    if (draft == 1)
-        draftbutton.style.display = 'block';
-    if (draft == 0 && approval == 1 && compliance == 0)
-        compliancebutton.style.display = 'block';
-    if (draft == 0 && approval == 1 && compliance == 1)
-        viewbutton.style.display = 'block';
-    if (y.style.display === 'none') {
-        x.style.display = 'none';
-        y.style.display = 'block';
-        z.style.display = 'block';
-    } else {
-        x.style.display = 'block';
-        y.style.display = 'none';
-        z.style.display = 'none';
-    }
-}*/
+
 
 function getStatus(x) {
     if (x == 0) {
@@ -206,12 +183,12 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
 	$scope.getInvoiceNofunc=function() {
 		
 		console.log("inside get invoice no. function");
-		$http.post('http://localhost:8181/invoice/getNextInvoiceNo').success(function(data) {
+		$http.post('http://localhost:8080/invoice/getNextInvoiceNo').success(function(data) {
             console.log("in get invoice no.http");
             $scope.invoice = data;
             console.log($scope.invoice);
         });
-		$http.post('http://localhost:8181/invoice/getContractNos?sellerID='+$scope.sessionid).success(function(data) {
+		$http.post('http://localhost:8080/invoice/getContractNos?sellerID='+$scope.sessionid).success(function(data) {
             console.log("in get contract no.");
             $scope.contractslist = data;
             console.log($scope.contractslist);
@@ -222,12 +199,12 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
 
 	$scope.getContractDetailsfunc=function(selectedContract) {
 		console.log("in get contract details function");
-		$http.post('http://localhost:8181/invoice/getContract?contractID='+selectedContract).success(function(data) {
+		$http.post('http://localhost:8080/invoice/getContract?contractID='+selectedContract).success(function(data) {
             console.log("in get contracthttp");
             $scope.contract = data;
             console.log($scope.contract);
         });
-		$http.post('http://localhost:8181/invoice/getContractItems?contractID='+selectedContract).success(function(data) {
+		$http.post('http://localhost:8080/invoice/getContractItems?contractID='+selectedContract).success(function(data) {
             console.log("in get contract items http");
             $scope.productlist = data;
             console.log($scope.productlist);
@@ -236,12 +213,12 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
 	}
 	$scope.getProductDetailsfunc=function(selectedProduct) {
 		console.log("in get product details function");
-		$http.post('http://localhost:8181/invoice/getProductDetails?productID='+selectedProduct).success(function(data) {
+		$http.post('http://localhost:8080/invoice/getProductDetails?productID='+selectedProduct).success(function(data) {
             console.log("in get product http");
             $scope.product = data;
             console.log($scope.product);
         });
-		$http.post('http://localhost:8181/invoice/getitemDetails?productID='+selectedProduct+'&quantity='+$scope.quantity).success(function(data) {
+		$http.post('http://localhost:8080/invoice/getitemDetails?productID='+selectedProduct+'&quantity='+$scope.quantity).success(function(data) {
             console.log("in get contract items http");
             $scope.item = data;
             console.log($scope.item);
@@ -260,22 +237,22 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
         console.log('netAmount: ' + $scope.netAmount);
 
         /*  Add New product  */
-        $http.post('http://localhost:8181/invoice/addItems?invoiceID=' + $scope.invoiceID + '&productID=' + $scope.selectedProduct + '&quantity=' + $scope.quantity + '&grossAmount=' + $scope.grossAmount + '&tax=' + $scope.tax + '&netAmount=' + $scope.netAmount)
+        $http.post('http://localhost:8080/invoice/addItems?invoiceID=' + $scope.invoiceID + '&productID=' + $scope.selectedProduct + '&quantity=' + $scope.quantity + '&grossAmount=' + $scope.grossAmount + '&tax=' + $scope.tax + '&netAmount=' + $scope.netAmount)
             .success(function(data) {
                 alert("Added new Item");
-                $http.post('http://localhost:8181/invoice/viewProduct/?id=' + $scope.invoiceID )
+                $http.post('http://localhost:8080/invoice/viewProduct/?id=' + $scope.invoiceID )
                     .success(function(data) {
                         $scope.productslist = data;
                         console.log($scope.productslist);
                     });
-                $http.post('http://localhost:8181/invoice/searchInvoice?invoiceID=' + $scope.invoiceID ).success(function(data) {
+                $http.post('http://localhost:8080/invoice/searchInvoice?invoiceID=' + $scope.invoiceID ).success(function(data) {
                     console.log("in create after adding product http");
                     $scope.invoice = data;
                     console.log($scope.invoice);
                     window.location = "#/InvoiceUpdate";
                 });
                 /*  view product  */
-                $http.post('http://localhost:8181/invoice/viewProduct/?id=' + $scope.invoiceNo)
+                $http.post('http://localhost:8080/invoice/viewProduct/?id=' + $scope.invoiceNo)
                     .success(function(data) {
                         $scope.productslist = data;
                         console.log($scope.productslist);
@@ -295,14 +272,14 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
         var invoiceNo = $scope.invoiceNo;
         console.log(invoiceNo);
         /*  view Invoice  */
-        $http.post('http://localhost:8181/invoice/searchInvoice?invoiceID=' + invoiceNo).success(function(data) {
+        $http.post('http://localhost:8080/invoice/searchInvoice?invoiceID=' + invoiceNo).success(function(data) {
             console.log("in view http");
             $scope.invoice = data;
             console.log($scope.invoice);
             window.location = "#/InvoiceDeleteConfirm";
         });
         /*  view product  */
-        $http.post('http://localhost:8181/invoice/viewProduct/?id=' + invoiceNo)
+        $http.post('http://localhost:8080/invoice/viewProduct/?id=' + invoiceNo)
             .success(function(data) {
                 $scope.productslist = data;
                 console.log($scope.productslist);
@@ -315,14 +292,14 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
         var invoiceNo = $scope.invoiceNo;
         console.log(invoiceNo);
         /*  view Invoice  */
-        $http.post('http://localhost:8181/invoice/searchInvoice?invoiceID=' + invoiceNo).success(function(data) {
+        $http.post('http://localhost:8080/invoice/searchInvoice?invoiceID=' + invoiceNo).success(function(data) {
             console.log("in search page after service");
             $scope.invoice = data;
             console.log($scope.invoice);
             window.location = "#/InvoiceSearch";
         });
         /*  view product  */
-        $http.post('http://localhost:8181/invoice/viewProduct/?id=' + invoiceNo)
+        $http.post('http://localhost:8080/invoice/viewProduct/?id=' + invoiceNo)
             .success(function(data) {
                 $scope.productslist = data;
                 console.log($scope.productslist);
@@ -355,15 +332,15 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
 
 
         /*  view Invoice  */
-        $http.post('http://localhost:8181/scm/invoice/addInvoice?invoiceID=' + $scope.invoiceID + "&productID=" + $scope.productID + "&quantity=" + $scope.quantity + "&contractID=" + $scope.poNo + "&sellerID=" + $scope.sellerId + "&buyerID=" + $scope.buyerId + "&senderID=" + $scope.sellerId + "&receiverID=" + $scope.buyerId + "&billbookNo=" + $scope.billBookNo + "&invoiceCreatedDate=" + $scope.invoiceCreatedDate + "&paymentDate=" + $scope.paymentDate + "&invoiceAmount=" + $scope.invoiceAmt + "&invoiceDueDate=" + $scope.invoiceDueDate).success(function(data) {
+        $http.post('http://localhost:8080/scm/invoice/addInvoice?invoiceID=' + $scope.invoiceID + "&productID=" + $scope.productID + "&quantity=" + $scope.quantity + "&contractID=" + $scope.poNo + "&sellerID=" + $scope.sellerId + "&buyerID=" + $scope.buyerId + "&senderID=" + $scope.sellerId + "&receiverID=" + $scope.buyerId + "&billbookNo=" + $scope.billBookNo + "&invoiceCreatedDate=" + $scope.invoiceCreatedDate + "&paymentDate=" + $scope.paymentDate + "&invoiceAmount=" + $scope.invoiceAmt + "&invoiceDueDate=" + $scope.invoiceDueDate).success(function(data) {
             console.log("in Add page After Add service");
             $scope.status = data;
             console.log($scope.message);
             /*  Add New product  
-                    $http.post('http://localhost:8181/scm/invoice/addItems?invoiceID='+$scope.invoiceID+'&productID='+$scope.productID+'&quantity='+ $scope.quantity+'&grossAmount='+$scope.grossAmount +'&tax='+$scope.tax +'&netAmount=' + $scope.netAmount)
+                    $http.post('http://localhost:8080/scm/invoice/addItems?invoiceID='+$scope.invoiceID+'&productID='+$scope.productID+'&quantity='+ $scope.quantity+'&grossAmount='+$scope.grossAmount +'&tax='+$scope.tax +'&netAmount=' + $scope.netAmount)
         			.success(function (data) {
         				alert("Added new Item");
-        				$http.post('http://localhost:8181/scm/invoice/viewProduct/?id=' + invoiceNo)
+        				$http.post('http://localhost:8080/scm/invoice/viewProduct/?id=' + invoiceNo)
             			.success(function (data) {
                             $scope.productslist = data;
                             console.log($scope.productslist);
@@ -372,7 +349,7 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
             // window.location = "#/InvoiceSearch";
         });
         /*  view product  
-                $http.post('http://localhost:8181/scm/invoice/viewProduct/?id=' + invoiceNo)
+                $http.post('http://localhost:8080/scm/invoice/viewProduct/?id=' + invoiceNo)
     			.success(function (data) {
                     $scope.productslist = data;
                     console.log($scope.productslist);
@@ -384,14 +361,14 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
         var invoiceNo = $scope.invoiceNo;
         console.log(invoiceNo);
         /*  view Invoice  */
-        $http.post('http://localhost:8181/invoice/searchInvoice?invoiceID=' + invoiceNo).success(function(data) {
+        $http.post('http://localhost:8080/invoice/searchInvoice?invoiceID=' + invoiceNo).success(function(data) {
             console.log("in updat after Search http");
             $scope.invoice = data;
             console.log($scope.invoice);
             window.location = "#/InvoiceUpdate";
         });
         /*  view product  */
-        $http.post('http://localhost:8181/invoice/viewProduct/?id=' + invoiceNo)
+        $http.post('http://localhost:8080/invoice/viewProduct/?id=' + invoiceNo)
             .success(function(data) {
                 $scope.productslist = data;
                 console.log($scope.productslist);
@@ -406,28 +383,28 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
         console.log('Product id: ' + $scope.delProductId);
 
         /*  view Invoice  
-    			$http.post('http://localhost:8181/invoice/searchInvoice?invoiceID='+invoiceNo).success(function (data) {
+    			$http.post('http://localhost:8080/invoice/searchInvoice?invoiceID='+invoiceNo).success(function (data) {
     				console.log( "in updat after Search http");
     				$scope.invoice = data;
                     console.log($scope.invoice);
                 });*/
         /*  delete product  */
-        $http.post('http://localhost:8181/invoice/deleteItem?invoiceID=' + $scope.invoiceNo + '&productID=' + $scope.delProductId)
+        $http.post('http://localhost:8080/invoice/deleteItem?invoiceID=' + $scope.invoiceNo + '&productID=' + $scope.delProductId)
             .success(function(data) {
                 alert(" deleted item with product id= " + $scope.delProductId + "Item");
-                $http.post('http://localhost:8181/invoice/viewProduct/?id=' + invoiceNo)
+                $http.post('http://localhost:8080/invoice/viewProduct/?id=' + invoiceNo)
                     .success(function(data) {
                         $scope.productslist = data;
                         console.log($scope.productslist);
                     });
-                $http.post('http://localhost:8181/invoice/searchInvoice?invoiceID=' + invoiceNo).success(function(data) {
+                $http.post('http://localhost:8080/invoice/searchInvoice?invoiceID=' + invoiceNo).success(function(data) {
                     console.log("in updat after Search http");
                     $scope.invoice = data;
                     console.log($scope.invoice);
                     window.location = "#/InvoiceUpdate";
                 });
                 /*  view product  */
-                $http.post('http://localhost:8181/invoice/viewProduct/?id=' + $scope.invoiceNo)
+                $http.post('http://localhost:8080/invoice/viewProduct/?id=' + $scope.invoiceNo)
                     .success(function(data) {
                         $scope.productslist = data;
                         console.log($scope.productslist);
@@ -443,7 +420,7 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
 
     $scope.deleteresultfunc = function() {
         console.log('go to delete result page');
-        $http.post('http://localhost:8181/invoice/deleteInvoice?invoiceID=' + $scope.invoiceNo)
+        $http.post('http://localhost:8080/invoice/deleteInvoice?invoiceID=' + $scope.invoiceNo)
             .success(function(data) {
                 $scope.message = data;
                 console.log(data);
@@ -454,7 +431,7 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
 
     $scope.receivedInvoicefunc = function() {
         console.log('inside received invoice');
-        $http.post('http://localhost:8181/invoice/ReceivedInvoices?sellerID=' + $scope.sessionid)
+        $http.post('http://localhost:8080/invoice/ReceivedInvoices?sellerID=' + $scope.sessionid)
             .success(function(data) {
                 console.log("inside http");
                 $scope.invoicelist = data;
@@ -465,14 +442,14 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
     }
     $scope.getapprovedInvoicefunc = function(invoiceNo) {
     	 console.log('inside get approved invoice');
-         $http.post('http://localhost:8181/invoice/searchInvoice?invoiceID=' + invoiceNo).success(function(data) {
+         $http.post('http://localhost:8080/invoice/searchInvoice?invoiceID=' + invoiceNo).success(function(data) {
              console.log("in search page after service");
              $scope.invoice = data;
              console.log($scope.invoice);
 
          });
          /*  view product  */
-         $http.post('http://localhost:8181/invoice/viewProduct/?id=' + invoiceNo)
+         $http.post('http://localhost:8080/invoice/viewProduct/?id=' + invoiceNo)
              .success(function(data) {
                  $scope.productslist = data;
                  console.log($scope.productslist);
@@ -482,14 +459,14 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
     }
     $scope.getrejectedInvoicefunc = function(invoiceNo) {
    	 console.log('inside get rejected invoice');
-        $http.post('http://localhost:8181/invoice/searchInvoice?invoiceID=' + invoiceNo).success(function(data) {
+        $http.post('http://localhost:8080/invoice/searchInvoice?invoiceID=' + invoiceNo).success(function(data) {
             console.log("in search page after service");
             $scope.invoice = data;
             console.log($scope.invoice);
 
         });
         /*  view product  */
-        $http.post('http://localhost:8181/invoice/viewProduct/?id=' + invoiceNo)
+        $http.post('http://localhost:8080/invoice/viewProduct/?id=' + invoiceNo)
             .success(function(data) {
                 $scope.productslist = data;
                 console.log($scope.productslist);
@@ -499,7 +476,7 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
    }
     $scope.sentInvoicefunc = function() {
         console.log('inside sent invoice');
-        $http.post('http://localhost:8181/invoice/SentInvoices?sellerID=' + $scope.sessionid)
+        $http.post('http://localhost:8080/invoice/SentInvoices?sellerID=' + $scope.sessionid)
             .success(function(data) {
                 console.log("inside http");
                 $scope.invoicelist1 = data;
@@ -510,7 +487,7 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
     }
     $scope.draftInvoicefunc = function() {
         console.log('inside draft invoice');
-        $http.post('http://localhost:8181/invoice/draftInvoices?sellerID=' + $scope.sessionid)
+        $http.post('http://localhost:8080/invoice/draftInvoices?sellerID=' + $scope.sessionid)
             .success(function(data) {
                 console.log("inside http");
                 $scope.invoicelist1 = data;
@@ -521,14 +498,14 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
     }
     $scope.viewfunc = function(invoiceNo) {
         console.log('inside view invoice');
-        $http.post('http://localhost:8181/invoice/searchInvoice?invoiceID=' + invoiceNo).success(function(data) {
+        $http.post('http://localhost:8080/invoice/searchInvoice?invoiceID=' + invoiceNo).success(function(data) {
             console.log("in search page after service");
             $scope.invoice = data;
             console.log($scope.invoice);
 
         });
         /*  view product  */
-        $http.post('http://localhost:8181/invoice/viewProduct/?id=' + invoiceNo)
+        $http.post('http://localhost:8080/invoice/viewProduct/?id=' + invoiceNo)
             .success(function(data) {
                 $scope.productslist = data;
                 console.log($scope.productslist);
@@ -538,7 +515,7 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
     $scope.approvefunc = function(invoiceNo) {
         console.log('inside approve invoice');
         
-        	$http.post('http://localhost:8181/invoice/approveInvoice?invoiceID=' + invoiceNo).success(function(data) {
+        	$http.post('http://localhost:8080/invoice/approveInvoice?invoiceID=' + invoiceNo).success(function(data) {
                 console.log("in approve page after service");
             });
         	$rootScope.approvedinvoice=invoiceNo;
@@ -546,7 +523,7 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
     }
     $scope.rejectfunc = function(invoiceNo) {
         console.log('inside reject invoice');
-        $http.post('http://localhost:8181/invoice/rejectInvoice?invoiceID=' + invoiceNo).success(function(data) {
+        $http.post('http://localhost:8080/invoice/rejectInvoice?invoiceID=' + invoiceNo).success(function(data) {
             console.log("in reject page after service");
         });
         $rootScope.rejectedinvoice=invoiceNo;
@@ -571,7 +548,7 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
     $scope.savedraftfunc = function() {
         console.log('inside save as draft invoice');
 
-        /*$http.post('http://localhost:8181/invoice/rejectInvoice?invoiceID='+invoiceNo).success(function (data) {
+        /*$http.post('http://localhost:8080/invoice/rejectInvoice?invoiceID='+invoiceNo).success(function (data) {
 				console.log( "in reject page after service");
 				$scope.status = "You have rejected invoice no:"+invoiceNo;
                 console.log($scope.status);  
@@ -585,7 +562,7 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
     $scope.sendtoapproval = function() {
         console.log('inside send to approval invoice');
 
-        /*$http.post('http://localhost:8181/invoice/rejectInvoice?invoiceID='+invoiceNo).success(function (data) {
+        /*$http.post('http://localhost:8080/invoice/rejectInvoice?invoiceID='+invoiceNo).success(function (data) {
 				console.log( "in reject page after service");
 				$scope.status = "You have rejected invoice no:"+invoiceNo;
                 console.log($scope.status);  
@@ -602,14 +579,14 @@ invoiceApp.controller('mainController', function($scope,$rootScope, $http) {
         var invoiceID = $scope.invoiceID;
         console.log(invoiceID);
         /*  view Invoice  */
-        $http.post('http://localhost:8181/invoice/searchInvoice?invoiceID=' + invoiceID).success(function(data) {
+        $http.post('http://localhost:8080/invoice/searchInvoice?invoiceID=' + invoiceID).success(function(data) {
             console.log("in view page after service");
             $scope.invoice = data;
             console.log($scope.invoice);
 
         });
         /*  view product  */
-        $http.post('http://localhost:8181/invoice/viewProduct/?id=' + invoiceID)
+        $http.post('http://localhost:8080/invoice/viewProduct/?id=' + invoiceID)
             .success(function(data) {
                 $scope.productslist = data;
                 console.log($scope.productslist);

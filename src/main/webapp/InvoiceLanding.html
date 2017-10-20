@@ -78,7 +78,7 @@
    		</div>
    		<div>	
    		<fieldset>
-   			<legend><b>Draft Inovices</b></legend>
+   			<legend><b>Draft Invoices</b></legend>
    				<br>
    				<button ng-click="draftInvoicefunc()">Click to get your invoices</button>
    				<a href="" onclick="myFunction2()">{{message2}}</a>
@@ -168,7 +168,7 @@
    				<button ng-click="rejectfunc(invoice.invoiceID)">Reject</button>
    				
    				<button onclick="gotoprofile()">Go To Profile</button>
-   				<button><a style="color:black;text-decoration: none" href="InvoiceIndex.html">Go To Home</a></button>
+   				<button><a style="color:black;text-decoration: none" href="EzeeIndex.html">Go To Home</a></button>
    				
    				
    				</fieldset>
@@ -226,11 +226,8 @@
    				<div style="color:blue">{{draftstatus}}</div>
    				<br>
    				<button onclick="gotoprofile()">Go To Profile</button>
-   				<button><a href="InvoiceIndex.html">Go To Home</a></button>
-   				</br>
-   				</br>
-   				</br>
-   				</br>
+   				<button><a href="EzeeIndex.html">Go To Home</a></button>
+   				
    		</div>
    		</div>
    		<div id="view2" style="display:none">
@@ -279,17 +276,14 @@
    				</table>
    				</br>
    				</fieldset>
-   				<button ng-click="savedraftfunc()">Save as Draft</button>
-   				<button ng-click="sendtoapproval()">Send To Approval</button>
-   				<br>
+   				<button  ng-click="savedraftfunc()">Save as Draft</button>
+   				<button  ng-click="sendtoapproval()">Send To Approval</button>
+   				
    				<div style="color:blue">{{draftstatus}}</div>
-   				<br>
-   				<button onclick="gotoprofile()">Go To Profile</button>
-   				<button><a href="InvoiceIndex.html">Go To Home</a></button>
-   				</br>
-   				</br>
-   				</br>
-   				</br>
+   				
+   				<button  onclick="gotoprofile()">Go To Profile</button>
+   				<button ><a href="EzeeIndex.html">Go To Home</a></button>
+   				
    		</div>
    		</div>
 </div>

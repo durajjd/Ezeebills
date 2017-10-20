@@ -1,7 +1,4 @@
-package com.rbs.training.supplychain.DAO;
-
-//Sample code to test connectivity in local machine- will be updated later
-
+package com.rbs.TMO.Jayadevi.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -54,6 +51,3 @@ public class DatabaseConnectionPostgreSQL {
 	 
 
 }
-
-
-

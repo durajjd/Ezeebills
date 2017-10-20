@@ -16,9 +16,9 @@
             $scope.myfunc = function () {
             	var x = $scope.approvalStatus;
             	console.log("x is:"+x);
-				console.log("http://localhost:8181/invoice/approvedInvocies/?approvalStatus="+x);
+				console.log("http://localhost:8080/invoice/approvedInvocies/?approvalStatus="+x);
 				console.log("yayyyy");
-                $http.post('http://localhost:8181/invoice/approvedInvocies/?approvalStatus='+x).success(function (data) {
+                $http.post('http://localhost:8080/invoice/approvedInvocies/?approvalStatus='+x).success(function (data) {
                     $scope.invoices = data;
                     console.log( $scope.invoices);
 

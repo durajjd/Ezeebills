@@ -1,4 +1,4 @@
-package com.rbs.training.supplychain;
+package com.rbs.TMO.Jayadevi;
 
 import org.apache.coyote.http11.AbstractHttp11Protocol;
 import org.springframework.boot.SpringApplication;
@@ -9,13 +9,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("com.rbs.training.supplychain.controller")
-public class SupplychainApplication {
+@ComponentScan("com.rbs.TMO.Jayadevi.controller")
+public class Ezeebills {
 
 	private int maxUploadSizeInMb = 10 * 1024; // 10 MB
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(SupplychainApplication.class, args);
+        SpringApplication.run(Ezeebills.class, args);
     }
     @Bean
     public TomcatEmbeddedServletContainerFactory tomcatEmbedded() {
